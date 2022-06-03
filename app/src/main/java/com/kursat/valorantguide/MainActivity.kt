@@ -1,15 +1,46 @@
 package com.kursat.valorantguide
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.MenuProvider
+import com.kursat.valorantguide.base.BaseActivity
+import com.kursat.valorantguide.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
+
+    override val mViewModel: MainActivityViewModel by viewModels()
+
+    override fun bindLayoutId(): Int = R.layout.activity_main
+
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+
+    override fun initViews() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setupNavigationDrawer()
+    }
+
+    private fun setupNavigationDrawer() {
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, mBinding.drawerLayout, 0, 0)
+        mBinding.drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+
+        // Add menu items without overriding methods in the Activity
+        addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                if (actionBarDrawerToggle.onOptionsItemSelected(menuItem))
+                    return true
+                return true
+            }
+        })
     }
 }
