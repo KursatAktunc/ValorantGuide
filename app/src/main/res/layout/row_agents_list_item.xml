@@ -12,67 +12,86 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp">
+        android:layout_height="300dp"
+        android:layout_margin="8dp">
 
         <ImageView
-            android:id="@+id/imgAgent"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:contentDescription="@string/contentdescription"
-            android:elevation="20dp"
-            android:loadImageFromUrl="@{agentsData.fullPortraitV2}"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="@+id/cardview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/fullportraitv2" />
-        <!--android:scaleType="centerCrop"-->
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="4dp"
-            android:elevation="2dp"
-            android:fontFamily="@font/valorant_font"
-            android:text="@{agentsData.role.displayName.toString()}"
-            app:layout_constraintBottom_toTopOf="@id/txtAgentName"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Initiator" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txtAgentName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:elevation="2dp"
-            android:fontFamily="@font/valorant_font"
-            android:text="@{agentsData.displayName.toString()}"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/cardview"
-            tools:text="FADE" />
-        <!--android:text="@{agentsModel.status.toString() + String.valueOf(agentsModelData.displayName)}"-->
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardview"
+            android:id="@+id/agent_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:background="#a23"
-            app:cardCornerRadius="8dp"
-            app:cardUseCompatPadding="true"
+            android:alpha=".50"
+            android:contentDescription="@string/contentdescription"
+            android:loadImageFromUrl="@{String.valueOf(agentsData.background)}"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/agent_portrait"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:contentDescription="@string/contentdescription"
+            android:loadImageFromUrl="@{String.valueOf(agentsData.fullPortraitV2)}"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            tools:src="@drawable/fullportraitv2" />
 
-        </com.google.android.material.card.MaterialCardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/agent_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/valorant_font"
+                android:text="@{agentsData.displayName.toString()}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/agent_icon"
+                tools:text="FADE" />
+
+            <ImageView
+                android:id="@+id/agent_icon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="@string/contentdescription"
+                android:loadImageFromUrl="@{String.valueOf(agentsData.role.displayIcon)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@drawable/displayicon" />
+
+            <TextView
+                android:id="@+id/agent_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:fontFamily="@font/valorant_font"
+                android:rotation="270"
+                android:text="@{agentsData.role.displayName.toString()}"
+                android:textColor="@color/valoran_red_color"
+                app:layout_constraintBottom_toTopOf="@+id/agent_icon"
+                app:layout_constraintEnd_toEndOf="@+id/agent_icon"
+                app:layout_constraintStart_toStartOf="@+id/agent_icon"
+                tools:text="Initiator" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
