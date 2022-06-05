@@ -10,4 +10,9 @@
         android:name="com.kursat.valorantguide.ui.agents.AgentsListFragment"
         android:label="Agents"
         tools:layout="@layout/fragment_agents_list" />
+    <fragment
+        android:id="@+id/agentDetailFragment"
+        android:name="com.kursat.valorantguide.ui.agentdetails.AgentDetailFragment"
+        android:label="Agent Detail"
+        tools:layout="@layout/fragment_agent_detail" />
 </navigation>

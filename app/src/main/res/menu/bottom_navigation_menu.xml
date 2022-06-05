@@ -5,4 +5,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_valorant_50"
         android:title="@string/bottom_navigation_agents" />
+    <!--<item
+        android:id="@+id/agentDetailFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_valorant_50"
+        android:title="Details" />-->
 </menu>
